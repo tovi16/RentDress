@@ -35,8 +35,8 @@ router.route('/')
     {
         let obj = req.body
 
-       userBL.creatDress(obj);
-       return resp.json("Created");
+       userBL.creatDress(obj).then(data=>{
+       return resp.json(data)});
     })
 
 router.route('/:id')
@@ -45,8 +45,8 @@ router.route('/:id')
         let obj = req.body
         let id = req.params.id;
 
-       userBL.updateDress(id,obj);
-       return resp.json("Updated");
+       userBL.updateDress(id,obj).then(data=>{
+       return resp.json(data)});
     })
 
 
@@ -56,8 +56,8 @@ router.route('/:id')
        
         let id = req.params.id;
 
-       userBL.deleteDress(id);
-       return resp.json("Deleted");
+       userBL.deleteDress(id).then(data=>{
+       return resp.json(data)});
     })
 
 

@@ -35,8 +35,8 @@ router.route('/')
     {
         let obj = req.body
 
-       userBL.creatOrder(obj);
-       return resp.json("Created");
+       userBL.creatOrder(obj).then(data=>{
+       return resp.json(data)});
     })
 
 router.route('/:id')
@@ -45,8 +45,8 @@ router.route('/:id')
         let obj = req.body
         let id = req.params.id;
 
-       userBL.updateOrder(id,obj);
-       return resp.json("Updated");
+       userBL.updateOrder(id,obj).then(data=>{
+       return resp.json(data)});
     })
 
 
@@ -56,8 +56,8 @@ router.route('/:id')
        
         let id = req.params.id;
 
-       userBL.deleteOrder(id);
-       return resp.json("Deleted");
+       userBL.deleteOrder(id).then(data=>{
+       return resp.json(data)});
     })
 
 

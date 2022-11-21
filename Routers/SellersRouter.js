@@ -38,7 +38,7 @@ router.route('/')
         let obj = req.body
 
        userBL.creatSeller(obj).then(data=>
-        {return resp.json("Created")});;
+        {return resp.json(data)});;
        
     })
 
@@ -49,7 +49,7 @@ router.route('/:id')
         let id = req.params.id;
 
        userBL.updateSeller(id,obj).then(data=>
-        {return resp.json("Updated")});
+        {return resp.json(data)});
        
     })
 
@@ -61,7 +61,7 @@ router.route('/:id')
         let id = req.params.id;
 
        userBL.deleteSeller(id).then(data=>
-        {return resp.json("Deleted")});
+        {return resp.json(data)});
        
     })
 

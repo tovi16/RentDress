@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 router.route('/')
-    .get(function(req, resp)
+    .get(authenticateJWT,function(req, resp)
     {console.log("router")
      userBL.getAllUsers().then(data =>{ return resp.json(data)} );
        
@@ -22,7 +22,7 @@ router.route('/')
     })
 */
 router.route('/:id')
-    .get(function(req, resp)
+    .get(authenticateJWT,function(req, resp)
     {
         let id = req.params.id
 
@@ -31,36 +31,42 @@ router.route('/:id')
     })
 
 
-router.route('/')
-    .post(function(req, resp)
+router.route('/register')
+    .post(authenticateJWT,function(req, resp)
     {
         let obj = req.body
 
-       userBL.creatUser(obj);
-       return resp.json("Created");
+       userBL.creatUser(obj).then(data=>{return resp.json(data)}).catch(err=> resp.status(400).send(err));
     })
 
 router.route('/:id')
-    .put(function(req, resp)
+    .put(authenticateJWT,function(req, resp)
     {
         let obj = req.body
         let id = req.params.id;
 
-       userBL.updateUser(id,obj);
-       return resp.json("Updated");
+       userBL.updateUser(id,obj).then(data=>{return resp.json(data)});
     })
 
 
 router.route('/:id')
-    .delete(function(req, resp)
+    .delete(authenticateJWT,function(req, resp)
     {
        
         let id = req.params.id;
 
-       userBL.deleteUser(id);
-       return resp.json("Deleted");
+       userBL.deleteUser(id).then(data=>{;
+       return resp.json(data)});
     })
 
+    router.route('/login')
+    .post(function(req, resp)
+    {
+       
+        const{mail,password}=req.body;
+        userBL.login(mail,password).then(data=>{return resp.json(data)}).catch(err=>resp.status(400).send(err))
+
+    })
 
 
 module.exports = router;
