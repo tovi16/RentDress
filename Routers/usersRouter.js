@@ -4,6 +4,39 @@ const userBL = require('../BL/UsersBL');
 
 const router = express.Router();
 
+const jwt= require('jsonwebtoken');
+const app= express();
+const accessTokenSecret='somerandomaccestokem'
+const refreshTokenSecret='somerandomforrefreshingtoken'
+
+const authenticateJWT=(req,res,next)=>{
+
+    const authHeader=req.headers.authorization;
+    if (authHeader)
+
+    {
+        const token=authHeader.split(' ')[1];
+        jwt.verify(authHeader,accessTokenSecret,(err,user)=>
+        {
+            if(err)
+            {
+                console.log(err)
+                return res.sendStatus(403);
+            }
+            req.user=user;
+            next();
+
+        });
+        
+
+    }
+    else 
+    {
+        res.sendStatus(401);
+    }
+    
+}
+
 
 router.route('/')
     .get(authenticateJWT,function(req, resp)

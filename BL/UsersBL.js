@@ -1,4 +1,4 @@
-const UsersModel = require("../Models/UsersModel")
+const UsersModel = require("../Models/UsersModel").default
 const jwt = require('jsonwebtoken');
 
 exports.getAllUsers = function() 

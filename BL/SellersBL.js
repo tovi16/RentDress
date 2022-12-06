@@ -1,4 +1,4 @@
-const SellersModel = require("../Models/SellersModel")
+const SellersModel = require("../Models/SellersModel").default
 
 exports.getAllSellers = function() 
 {

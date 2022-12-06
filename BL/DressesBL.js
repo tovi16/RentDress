@@ -1,4 +1,4 @@
-const DressesModel = require("../Models/DressesModel")
+const DressesModel = require("../Models/DressesModel").default
 
 exports.getAllDresses = function() 
 {
